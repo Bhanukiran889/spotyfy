@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Assistant:wght@400;700&display=swap');
+
+.login-form-container {
+  background-image: url('https://res.cloudinary.com/dulgbxqkm/image/upload/v1745138781/Spotify_Profile_mmik6n.png');
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-continer {
+  background-color: #181818;
+  opacity: 0.8;
+  border: none;
+  border-radius: 12px;
+  width: 456px;
+  height: 433px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+.login-website {
+  align-self: center;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input-label {
+  color: #fff;
+  font-family: 'Inter';
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 5%;
+  font-weight: 600;
+  margin: 15px 0 8px 0;
+}
+.website-name {
+  color: #fff;
+  font-family: 'Assistant';
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.login-button {
+  background-color: #1db954;
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 8px;
+  margin: 20px 0 5px 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  font-family: 'Assistant';
+}
+.username-input-field,
+.password-input-field {
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 48px;
+  border-radius: 4px;
+  font-size: 18px;
+  padding: 0 10px;
+}
+
+.error-message {
+  color: #ff0000;
+}
+/* 📱 Mobile (max-width: 480px) */
+@media screen and (max-width: 480px) {
+  .form-continer {
+    width: 90%;
+    height: auto;
+    padding: 16px;
+  }
+
+  .website-name {
+    font-size: 28px;
+  }
+
+  .login-button {
+    height: 40px;
+    font-size: 14px;
+    width: 90px;
+    align-self: center;
+  }
+
+  .username-input-field,
+  .password-input-field {
+    height: 35px;
+    font-size: 16px;
+
+  }
+}
+
+/* 📱📲 Tablet (481px to 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .form-continer {
+    width: 80%;
+    height: auto;
+    padding: 20px;
+  }
+
+  .website-name {
+    font-size: 28px;
+  }
+
+  .login-button {
+    height: 45px;
+    font-size: 15px;
+  }
+
+  .username-input-field,
+  .password-input-field {
+    height: 45px;
+    font-size: 17px;
+  }
+}
+
+/* 💻 Small Desktop (769px to 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .form-continer {
+    width: 400px;
+    height: auto;
+  }
+
+  .website-name {
+    font-size: 30px;
+  }
+}
