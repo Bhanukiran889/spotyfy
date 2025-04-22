@@ -11,14 +11,20 @@ const Home = () => {
   }
 
   return (
-    <>
-      <Header />
-      <div className="home-container">
-        <div className="home-content">
-          <h1 className="home-heading">Spotify Home</h1>
-        </div>
+    <div className="container">
+      <div>
+        <Header />
       </div>
-    </>
+      <div className="home-container">
+        <button type="button" className="back-btn">
+          <img
+            src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745318895/arrow_back_lnm6iz.png"
+            alt="back icon"
+          />
+        </button>
+        <span>Back</span>
+      </div>
+    </div>
   )
 }
 
