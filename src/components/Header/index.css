@@ -1,0 +1,24 @@
+.logout-btn {
+  background-color: transparent;
+  text-align: center;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+}
+.nav-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #181818;
+  height: 100vh;
+  width: 8vw;
+  padding: 20px;
+  color: #fff;
+}
+.website-nav-logo{
+  width: 80%;
+}

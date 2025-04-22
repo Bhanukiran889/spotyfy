@@ -103,7 +103,6 @@
   .password-input-field {
     height: 35px;
     font-size: 16px;
-
   }
 }
 
@@ -141,4 +140,20 @@
   .website-name {
     font-size: 30px;
   }
+}
+
+.loader-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #181818;
+  color: #fff;
+  font-family: 'Assistant';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logging{
+  margin-top: 10px;
 }

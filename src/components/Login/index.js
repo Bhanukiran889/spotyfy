@@ -10,6 +10,7 @@ class LoginForm extends Component {
     password: '',
     showSubmitError: false,
     errorMsg: '',
+    isLoading: false,
   }
 
   onChangeUsername = event => {
@@ -21,22 +22,26 @@ class LoginForm extends Component {
   }
 
   onSubmitSuccess = jwtToken => {
-    const {history} = this.props
+    this.setState({isLoading: true})
 
-    Cookies.set('jwt_token', jwtToken, {
-      expires: 30,
-      path: '/',
-    })
-    history.replace('/')
+    setTimeout(() => {
+      Cookies.set('jwt_token', jwtToken, {
+        expires: 30,
+        path: '/',
+      })
+      const {history} = this.props
+      history.replace('/')
+    }, 1500)
   }
 
   onSubmitFailure = errorMsg => {
-    console.log(errorMsg)
-    this.setState({showSubmitError: true, errorMsg})
+    this.setState({showSubmitError: true, errorMsg, isLoading: false})
   }
 
   submitForm = async event => {
     event.preventDefault()
+    this.setState({isLoading: true})
+
     const {username, password} = this.state
     const userDetails = {username, password}
     const url = 'https://apis.ccbp.in/login'
@@ -44,8 +49,10 @@ class LoginForm extends Component {
       method: 'POST',
       body: JSON.stringify(userDetails),
     }
+
     const response = await fetch(url, options)
     const data = await response.json()
+
     if (response.ok === true) {
       this.onSubmitSuccess(data.jwt_token)
     } else {
@@ -90,28 +97,46 @@ class LoginForm extends Component {
   }
 
   render() {
-    const {showSubmitError, errorMsg} = this.state
+    const {showSubmitError, errorMsg, isLoading} = this.state
     const jwtToken = Cookies.get('jwt_token')
     if (jwtToken !== undefined) {
       return <Redirect to="/" />
     }
+
     return (
-      <div className="login-form-container">
-        <form className="form-continer" onSubmit={this.submitForm}>
-          <img
-            src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745139104/Vector_zkrlha.png"
-            className="login-website"
-            alt="spoty_logo"
-          />
-          <h1 className="website-name">Spotify Remix</h1>
-          <div className="input-container">{this.renderUsernameField()}</div>
-          <div className="input-container">{this.renderPasswordField()}</div>
-          <button type="submit" className="login-button">
-            Login
-          </button>
-          {showSubmitError && <p className="error-message">*{errorMsg}</p>}
-        </form>
-      </div>
+      <>
+        {isLoading ? (
+          <div className="loader-container">
+            <img
+              src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745139104/Vector_zkrlha.png"
+              className="login-website"
+              alt="loading"
+            />
+            <h1 className="logging">Logging in...</h1>
+          </div>
+        ) : (
+          <div className="login-form-container">
+            <form className="form-continer" onSubmit={this.submitForm}>
+              <img
+                src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745139104/Vector_zkrlha.png"
+                className="login-website"
+                alt="spoty_logo"
+              />
+              <h1 className="website-name">Spotify Remix</h1>
+              <div className="input-container">
+                {this.renderUsernameField()}
+              </div>
+              <div className="input-container">
+                {this.renderPasswordField()}
+              </div>
+              <button type="submit" className="login-button">
+                Login
+              </button>
+              {showSubmitError && <p className="error-message">*{errorMsg}</p>}
+            </form>
+          </div>
+        )}
+      </>
     )
   }
 }
