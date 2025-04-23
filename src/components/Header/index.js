@@ -18,7 +18,7 @@ const Header = props => {
   }
 
   return (
-    <nav className="nav-header">
+    <div className="nav-header">
       <div className="nav-content">
         <Link to="/">
           <img
@@ -68,7 +68,7 @@ const Header = props => {
           />
         </button>
       </div>
-    </nav>
+    </div>
   )
 }
 

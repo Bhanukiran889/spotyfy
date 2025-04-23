@@ -120,7 +120,7 @@ class LoginForm extends Component {
               <img
                 src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745139104/Vector_zkrlha.png"
                 className="login-website"
-                alt="spoty_logo"
+                alt="login website logo"
               />
               <h1 className="website-name">Spotify Remix</h1>
               <div className="input-container">

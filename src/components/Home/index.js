@@ -1,7 +1,8 @@
 import Cookies from 'js-cookie'
-import {Redirect, Link} from 'react-router-dom'
-
+import {Redirect, withRouter} from 'react-router-dom'
+import PlaylistSection from '../PlaylistSection'
 import Header from '../Header'
+import GanresSection from '../GanresSection'
 import './index.css'
 
 const Home = () => {
@@ -16,16 +17,14 @@ const Home = () => {
         <Header />
       </div>
       <div className="home-container">
-        <button type="button" className="back-btn">
-          <img
-            src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745318895/arrow_back_lnm6iz.png"
-            alt="back icon"
-          />
-        </button>
-        <span>Back</span>
+        <h1>Editor's Picks</h1>
+        <PlaylistSection apiUrl="https://apis2.ccbp.in/spotify-clone/featured-playlists" />
+
+        <h1>Genres & Moods</h1>
+        <GanresSection apiUrl="https://apis2.ccbp.in/spotify-clone/featured-playlists" />
       </div>
     </div>
   )
 }
 
-export default Home
+export default withRouter(Home)

@@ -4,27 +4,109 @@
   height: 100vh;
   width: 100vw;
 }
-
 .home-container {
   flex: 1;
   background-color: #181818;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   overflow-y: auto;
   height: 100vh;
   color: #fff;
+  padding: 100px 30px 0 30px;
 }
 
+.back-btn {
+  color: #fff;
+  background-color: transparent;
+  border: none;
+}
+
+.logout-btn {
+  background-color: transparent;
+  text-align: center;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+}
+.nav-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #040306;
+  height: 100vh;
+  width: 8vw;
+  padding: 20px;
+  color: #fff;
+}
+.website-nav-logo {
+  width: 80%;
+}
+.log-btn {
+  display: none;
+}
+
+.menu-btn {
+  background-color: transparent;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+.is-menu {
+  display: none;
+}
 @media screen and (max-width: 480px) {
   .container {
     flex-direction: row;
   }
 }
 
-.back-btn{
-  color: #fff;
-  background-color: transparent;
-  border: none;
+@media screen and (max-width: 480px) {
+  .nav-content {
+    flex-direction: row;
+    height: 10vh;
+    width: 100vw;
+  }
+  .nav-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .logout-btn-xl {
+    display: none;
+  }
+}
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .nav-content {
+    flex-direction: row;
+    height: 10vh;
+    width: 100vw;
+  }
+  .nav-header {
+    position: fixed; /* Fix it to the viewport */
+    top: 0; /* Stick to the top */
+    left: 0;
+    width: 100%;
+  }
+  .logout-btn-xl {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .logout-btn-sm,
+  .menu-btn {
+    display: none;
+  }
+
+  .home-container {
+    padding-top: 20px;
+  }
 }

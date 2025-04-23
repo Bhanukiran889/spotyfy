@@ -1,0 +1,45 @@
+.not-found-img {
+  width: 50%;
+  height: auto;
+}
+.back-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.not-found-container {
+  position: relative; /* Add this */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #181818;
+  color: #fff;
+  width: 92vw;
+  font-family: Assistant;
+}
+.not-found-text {
+  font-size: 40px;
+  font-weight: 700;
+  margin-top: 15px;
+}
+.home-btn {
+  padding: 0 15px;
+}
+
+@media screen and (max-width: 769px) {
+  .not-found-container {
+    width: 100vw;
+  }
+  .not-found-text {
+    font-size: 25px;
+  }
+  .home-btn {
+    font-size: 12px;
+    padding: 0 5px;
+  }
+}
