@@ -113,7 +113,7 @@ class PlaylistSection extends Component {
             <li
               key={each.id}
               className={`playlist-item ${
-                each.name.length > 25 ? 'playlist-long-name' : ''
+                each.name.length > 15 ? 'playlist-long-name' : ''
               }`}
             >
               <Link to={toUrl} className="playlist-link">

@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .playlist-list {
   display: flex;
   flex-wrap: wrap;
@@ -22,7 +23,31 @@
   list-style-type: none;
   border-radius: 5px;
   margin: 10px;
+  width: 175px; /* Ensure the items are aligned */
+  overflow: hidden; /* Hide any overflowed text */
 }
+
+.playlist-item p {
+  display: inline-block;
+  text-align: center; /* Center the text */
+  width: 100%; /* Ensure the text is contained within the item */
+  white-space: nowrap; /* Prevent wrapping of the name */
+  overflow: hidden;
+}
+
+.playlist-item.long-name p {
+  animation: slide 10s linear infinite; /* Make the text slide if it's a long name */
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(100%); /* Start from the right off-screen */
+  }
+  100% {
+    transform: translateX(-100%); /* End at the left off-screen */
+  }
+}
+
 .somthing-wrong {
   display: flex;
   flex-direction: column;
@@ -43,6 +68,7 @@
   height: 48px;
   margin: 20px 0;
 }
+
 .try-again-btn {
   border: none;
   border-radius: 5px;
