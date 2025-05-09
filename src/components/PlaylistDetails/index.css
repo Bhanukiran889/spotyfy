@@ -1,0 +1,25 @@
+.playlist-details-track-item {
+  padding: 10px 16px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  background-color: #1a1a1a;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.playlist-details-track-item.clickable:hover {
+  cursor: pointer;
+  background-color: #1db954;
+  color: #000;
+}
+
+.playlist-details-track-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.playlist-audio-player {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 500px;
+}
