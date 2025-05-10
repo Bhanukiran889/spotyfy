@@ -7,7 +7,7 @@ class Home extends Component {
   render() {
     return (
       <div className="container">
-        <div>
+        <div className="nav-card">
           <Header />
         </div>
         <div className="home-container">

@@ -109,20 +109,29 @@ class PlaylistSection extends Component {
             altText = 'new release album'
           }
 
+          const isLongName = each.name.length > 15
+
           return (
             <li
               key={each.id}
               className={`playlist-item ${
-                each.name.length > 15 ? 'playlist-long-name' : ''
+                isLongName ? 'playlist-long-name' : ''
               }`}
             >
               <Link to={toUrl} className="playlist-link">
-                <img
-                  src={each.imageUrl}
-                  alt={altText}
-                  className="playlist-img"
-                />
-                <p className="playlist-name">{each.name}</p>
+                <div className="lick-card">
+                  <div className="img-container">
+                    <img
+                      src={each.imageUrl}
+                      alt={altText}
+                      className="playlist-img"
+                    />
+                  </div>
+                  <div className="playlist-name-wrapper">
+                    <p className="playlist-name">{each.name}</p>
+                    <p>{each.id}</p>
+                  </div>
+                </div>
               </Link>
             </li>
           )

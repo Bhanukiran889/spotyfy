@@ -1,6 +1,9 @@
 import {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
+import Header from '../Header'
+import BackButton from '../BackButton'
+import './index.css'
 
 class CategoryPlaylistsDetails extends Component {
   state = {
@@ -47,22 +50,32 @@ class CategoryPlaylistsDetails extends Component {
     if (hasError) return <p>Error loading playlists.</p>
 
     return (
-      <div>
-        <h2>Category Playlists</h2>
-        <ul>
-          {playlists.map(playlist => (
-            <li key={playlist.id}>
-              <Link to={`/playlist/${playlist.id}`}>
-                <img
-                  src={playlist.images[0]?.url}
-                  alt={playlist.name}
-                  width="150"
-                />
-                <p>{playlist.name}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
+      <div className="container">
+        <div>
+          <Header />
+        </div>
+        <div className="main-container">
+          <div>
+            <BackButton />
+          </div>
+          <div className="category-container">
+            <h2>Category Playlists</h2>
+            <ul className="category-list">
+              {playlists.map(playlist => (
+                <li className="category-item" key={playlist.id}>
+                  <Link to={`/playlist/${playlist.id}`}>
+                    <img
+                      src={playlist.images[0]?.url}
+                      alt={playlist.name}
+                      width="150"
+                    />
+                    <p>{playlist.name}</p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     )
   }

@@ -68,18 +68,22 @@ class PlaylistDetails extends Component {
 
     return (
       <div className="container">
-        <Header />
+        <div>
+          <Header />
+        </div>
         <div className="main-container">
+          <BackButton />
           <div>
-            <BackButton />
-          </div>
-          <div>
-            <h2 className="playlist-details-title">{playlist.name}</h2>
             <img
               src={playlist.images[0]?.url}
               alt={playlist.name}
               className="playlist-details-image"
             />
+            <div>
+              <p>Editors picks</p>
+              <h2 className="playlist-details-title">{playlist.name}</h2>
+              <p>{playlist.description}</p>
+            </div>
             <ul className="playlist-details-tracks">
               {playlist.tracks.items.map(track => {
                 const previewUrl = track.track.preview_url

@@ -65,6 +65,13 @@ button {
   .container {
     flex-direction: row;
   }
+  .home-container {
+    padding-top: 100px;
+    z-index: 0;
+  }
+  .nav-card {
+    z-index: 100000;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -82,6 +89,12 @@ button {
   .logout-btn-xl {
     display: none;
   }
+  .home-container {
+    z-index: 0;
+  }
+  .nav-card {
+    z-index: 1000000;
+  }
 }
 @media screen and (min-width: 481px) and (max-width: 768px) {
   .nav-content {
@@ -90,13 +103,19 @@ button {
     width: 100vw;
   }
   .nav-header {
-    position: fixed; /* Fix it to the viewport */
-    top: 0; /* Stick to the top */
+    position: fixed;
+    top: 0;
     left: 0;
     width: 100%;
   }
   .logout-btn-xl {
     display: none;
+  }
+  .nav-card {
+    z-index: 100000;
+  }
+  .home-container {
+    z-index: 0;
   }
 }
 
