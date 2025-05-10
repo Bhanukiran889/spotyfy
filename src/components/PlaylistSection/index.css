@@ -86,12 +86,11 @@
     height: 100%;
   }
   .playlist-item.long-name p {
-  animation: slide 10s linear infinite;
-  position: relative;
-  z-index: -1;
-  will-change: transform;
-}
-
+    animation: slide 10s linear infinite;
+    position: relative;
+    z-index: -1;
+    will-change: transform;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -106,10 +105,9 @@
     height: auto;
   }
   .playlist-item.long-name p {
-  animation: slide 10s linear infinite;
-  position: relative;
-  z-index: -1;
-  will-change: transform;
-}
-
+    animation: slide 10s linear infinite;
+    position: relative;
+    z-index: -1;
+    will-change: transform;
+  }
 }
