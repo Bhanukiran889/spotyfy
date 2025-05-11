@@ -1,64 +1,9 @@
-.bottom-audio-player {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #1e1e1e;
-  color: #ffffff;
-  padding: 12px 20px;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 100;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.album-audio-element {
-  width: 100%;
-  max-width: 600px;
-  margin-top: 8px;
-  box-sizing: border-box;
-}
-.album-tracklist-item {
-  cursor: pointer;
-}
-
-.album-container {
-  position: relative; /* Add this */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #181818;
-  color: #fff;
-  width: 92vw;
-  font-family: Assistant;
-}
-
-/* Tablets */
-@media screen and (max-width: 992px) {
-  .album-container {
-    width: 100vh;
-  }
-  .album-details-image {
-    width: 500px;
-    height: 500px;
-  }
-}
-@media screen and (max-width: 768px) {
-  .album-details-image {
-    margin: 10px;
-    width: 300px;
-    height: 300px;
-  }
-}
 .album-audio-player {
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: 72px;
   right: 0;
+  width: 92vw;
   background-color: #1e1e1e;
   padding: 12px 20px;
   display: flex;
@@ -177,7 +122,7 @@ input[type='range'] {
 }
 
 .timeline-slider::-moz-range-track {
-  height: 6px;
+  height: 4px;
   background: linear-gradient(
     to right,
     #1db954 var(--progress, 0%),
@@ -208,8 +153,8 @@ input[type='range'] {
 
 .volume-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   background-color: white;
   border-radius: 50%;
   margin-top: -2px;
@@ -217,7 +162,7 @@ input[type='range'] {
 }
 
 .volume-slider::-moz-range-track {
-  height: 6px;
+  height: 4px;
   background: linear-gradient(
     to right,
     #1db954 var(--volume-progress, 0%),

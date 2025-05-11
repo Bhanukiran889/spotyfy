@@ -12,6 +12,7 @@ dependencies:
   react: 17.0.1
   react-audio-player: 0.17.0_react-dom@17.0.1+react@17.0.1
   react-dom: 17.0.1_react@17.0.1
+  react-h5-audio-player: 3.10.0-rc.1_react-dom@17.0.1+react@17.0.1
   react-icons: 4.3.1_react@17.0.1
   react-loader-spinner: 6.1.6_react-dom@17.0.1+react@17.0.1
   react-router-dom: 5.2.0_react@17.0.1
@@ -2642,6 +2643,12 @@ packages:
       node: '>=6.9.0'
     resolution:
       integrity: sha512-VtPOkrdPHZsKc/clNqyi9WUA8TINkZ4cGk63UUE3u4pmB2k+ZMQRDuIOagv8UVd6j7k0T3+RRIb7beKTebNbcw==
+  /@babel/runtime/7.27.1:
+    dev: false
+    engines:
+      node: '>=6.9.0'
+    resolution:
+      integrity: sha512-1x3D2xEk2fRo3PAhwQwu5UubzgiVWSXTBfWpVd2Mx2AzRqJuDJCsgaDVZ7HB5iGzDW1Hl1sWN2mFyKjmR9uAog==
   /@babel/template/7.27.0:
     dependencies:
       '@babel/code-frame': 7.26.2
@@ -2781,6 +2788,19 @@ packages:
     dev: true
     resolution:
       integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
+  /@iconify/react/5.2.1_react@17.0.1:
+    dependencies:
+      '@iconify/types': 2.0.0
+      react: 17.0.1
+    dev: false
+    peerDependencies:
+      react: '>=16'
+    resolution:
+      integrity: sha512-37GDR3fYDZmnmUn9RagyaX+zca24jfVOMY8E1IXTqJuE8pxNtN51KWPQe3VODOWvuUurq7q9uUu3CFrpqj5Iqg==
+  /@iconify/types/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==
   /@istanbuljs/load-nyc-config/1.1.0:
     dependencies:
       camelcase: 5.3.1
@@ -12666,6 +12686,18 @@ packages:
     dev: true
     resolution:
       integrity: sha512-SN/U6Ytxf1QGkw/9ve5Y+NxBbZM6Ht95tuXNMKs8EJyFa/Vy/+Co3stop3KBHARfn/giv+Lj1uUnTfOJ3moFEQ==
+  /react-h5-audio-player/3.10.0-rc.1_react-dom@17.0.1+react@17.0.1:
+    dependencies:
+      '@babel/runtime': 7.27.1
+      '@iconify/react': 5.2.1_react@17.0.1
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+    dev: false
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    resolution:
+      integrity: sha512-A/Okq9BoOfqUc1oQxcqZWeL5DMeBAMfb7aA7G64EAle3BM7PVYH9ZyES9PespfT2CgKRpAv855gUoMs0PWGhOQ==
   /react-icons/4.3.1_react@17.0.1:
     dependencies:
       react: 17.0.1
@@ -15790,6 +15822,7 @@ specifiers:
   react: 17.0.1
   react-audio-player: 0.17.0
   react-dom: 17.0.1
+  react-h5-audio-player: 3.10.0-rc.1
   react-icons: 4.3.1
   react-loader-spinner: 6.1.6
   react-router-dom: 5.2.0

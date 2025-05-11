@@ -2,7 +2,7 @@ import {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import Header from '../Header'
 import BackButton from '../BackButton'
-
+import AudioPlayer from '../AudioPlayer' // ✅ Import AudioPlayer
 import './index.css'
 
 class PlaylistDetails extends Component {
@@ -10,10 +10,12 @@ class PlaylistDetails extends Component {
     playlist: null,
     isLoading: true,
     hasError: false,
-    currentAudioUrl: '', // ✅ Track currently playing
+    currentTrack: null, // ✅ Current selected track object
+    isPlaying: false,
+    volume: 1,
+    currentTime: 0,
+    duration: 0,
   }
-
-  audioRef = null
 
   componentDidMount() {
     this.fetchPlaylistDetails()
@@ -38,21 +40,41 @@ class PlaylistDetails extends Component {
     }
   }
 
-  handleTrackClick = previewUrl => {
-    if (this.audioRef) {
-      this.audioRef.pause()
-    }
+  handleTrackClick = track => {
+    this.setState({currentTrack: track, isPlaying: true})
+  }
 
-    this.setState({currentAudioUrl: previewUrl}, () => {
-      if (this.audioRef) {
-        this.audioRef.load()
-        this.audioRef.play()
-      }
-    })
+  handleTogglePlay = () => {
+    this.setState(prevState => ({isPlaying: !prevState.isPlaying}))
+  }
+
+  handleTimeUpdate = currentTime => {
+    this.setState({currentTime})
+  }
+
+  handleDuration = duration => {
+    this.setState({duration})
+  }
+
+  handleVolumeChange = volume => {
+    this.setState({volume})
+  }
+
+  handlePlayStateChange = isPlaying => {
+    this.setState({isPlaying})
   }
 
   render() {
-    const {playlist, isLoading, hasError, currentAudioUrl} = this.state
+    const {
+      playlist,
+      isLoading,
+      hasError,
+      currentTrack,
+      isPlaying,
+      volume,
+      currentTime,
+      duration,
+    } = this.state
 
     if (isLoading) {
       return <p className="playlist-details-loader">Loading playlist...</p>
@@ -68,9 +90,7 @@ class PlaylistDetails extends Component {
 
     return (
       <div className="container">
-        <div>
-          <Header />
-        </div>
+        <Header />
         <div className="main-container">
           <BackButton />
           <div>
@@ -84,38 +104,49 @@ class PlaylistDetails extends Component {
               <h2 className="playlist-details-title">{playlist.name}</h2>
               <p>{playlist.description}</p>
             </div>
+
             <ul className="playlist-details-tracks">
-              {playlist.tracks.items.map(track => {
-                const previewUrl = track.track.preview_url
+              {playlist.tracks.items.map(({track}) => {
+                const {preview_url: previewUrl, id, name, artists} = track
                 const isPlayable = Boolean(previewUrl)
+
                 return (
                   <li
-                    key={track.track.id}
+                    key={id}
                     className={`playlist-details-track-item ${
                       isPlayable ? 'clickable' : 'disabled'
                     }`}
                     onClick={() =>
-                      isPlayable ? this.handleTrackClick(previewUrl) : null
+                      isPlayable ? this.handleTrackClick(track) : null
                     }
                   >
-                    {track.track.name} - {track.track.artists[0]?.name}
+                    {name} - {artists[0]?.name}
                     {!isPlayable && <span> (No preview)</span>}
                   </li>
                 )
               })}
             </ul>
-            {/* ✅ Audio player */}
-            <audio
-              ref={ref => {
-                this.audioRef = ref
-              }}
-              className="playlist-audio-player"
-              controls
-            >
-              <source src={currentAudioUrl} type="audio/mpeg" />
-              <track kind="captions" srcLang="en" label="English captions" />
-              Your browser does not support the audio element.
-            </audio>
+
+            {currentTrack && (
+              <AudioPlayer
+                currentTrack={{
+                  id: currentTrack.id,
+                  name: currentTrack.name,
+                  previewUrl: currentTrack.preview_url,
+                  artists: currentTrack.artists,
+                }}
+                albumImage={playlist.images[0]?.url}
+                isPlaying={isPlaying}
+                onTogglePlay={this.handleTogglePlay}
+                onTimeUpdate={this.handleTimeUpdate}
+                onDuration={this.handleDuration}
+                currentTime={currentTime}
+                duration={duration}
+                volume={volume}
+                onVolumeChange={this.handleVolumeChange}
+                onPlayStateChange={this.handlePlayStateChange}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@
   align-items: center;
 }
 .not-found-container {
-  position: relative; /* Add this */
+  position: relative; 
   display: flex;
   flex-direction: column;
   justify-content: center;

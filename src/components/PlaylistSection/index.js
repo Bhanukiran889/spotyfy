@@ -78,7 +78,7 @@ class PlaylistSection extends Component {
           <img
             className="playlist-error-img"
             src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745397060/Icon_1_vcnjka.png"
-            alt="something went wrong"
+            alt="failure view"
           />
           <p className="playlist-error-text">
             Something went wrong. Please try again
@@ -109,7 +109,7 @@ class PlaylistSection extends Component {
             altText = 'new release album'
           }
 
-          const isLongName = each.name.length > 15
+          const isLongName = each.name.length > 20
 
           return (
             <li
@@ -129,7 +129,6 @@ class PlaylistSection extends Component {
                   </div>
                   <div className="playlist-name-wrapper">
                     <p className="playlist-name">{each.name}</p>
-                    <p>{each.id}</p>
                   </div>
                 </div>
               </Link>

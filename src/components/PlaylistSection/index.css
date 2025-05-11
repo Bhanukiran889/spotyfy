@@ -57,7 +57,7 @@
 }
 
 .playlist-item.playlist-long-name .playlist-name {
-  animation: slide 10s linear infinite;
+  animation: slide 15s linear infinite;
 }
 
 /* Scrolling animation */

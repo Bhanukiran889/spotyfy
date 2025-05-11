@@ -1,39 +1,27 @@
 import {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import Cookies from 'js-cookie'
-import {FaPlay, FaPause, FaVolumeUp, FaVolumeMute} from 'react-icons/fa'
 
 import Header from '../Header'
 import BackButton from '../BackButton'
+import AudioPlayer from '../AudioPlayer'
+
 import './index.css'
 
 class AlbumDetails extends Component {
-  constructor(props) {
-    super(props)
-    this.audioRef = null
-    this.state = {
-      album: null,
-      isLoading: true,
-      hasError: false,
-      currentTrack: null,
-      isPlaying: false,
-      volume: 1,
-      duration: 0,
-      currentTime: 0,
-    }
+  state = {
+    album: null,
+    isLoading: true,
+    hasError: false,
+    currentTrack: null,
+    isPlaying: false,
+    volume: 1,
+    duration: 0,
+    currentTime: 0,
   }
 
   componentDidMount() {
     this.fetchAlbum()
-  }
-
-  componentDidUpdate(_, prevState) {
-    const {currentTrack} = this.state
-    if (this.audioRef && prevState.currentTrack !== currentTrack) {
-      this.audioRef.load()
-      this.audioRef.play()
-      this.setState({isPlaying: true})
-    }
   }
 
   fetchAlbum = async () => {
@@ -62,7 +50,22 @@ class AlbumDetails extends Component {
 
       if (response.ok) {
         const data = await response.json()
-        this.setState({album: data, isLoading: false})
+        if (data.tracks.items.length > 0) {
+          const firstTrack = data.tracks.items[0]
+          this.setState({
+            album: data,
+            currentTrack: {
+              id: firstTrack.id,
+              name: firstTrack.name,
+              artists: firstTrack.artists,
+              durationMs: firstTrack.duration_ms,
+              previewUrl: firstTrack.preview_url,
+            },
+            isLoading: false,
+          })
+        } else {
+          this.setState({album: data, isLoading: false})
+        }
       } else {
         this.setState({hasError: true, isLoading: false})
       }
@@ -77,37 +80,7 @@ class AlbumDetails extends Component {
   }
 
   handlePlayPause = () => {
-    const {isPlaying} = this.state
-    if (isPlaying) {
-      this.audioRef.pause()
-    } else {
-      this.audioRef.play()
-    }
     this.setState(prevState => ({isPlaying: !prevState.isPlaying}))
-  }
-
-  handleTimeUpdate = () => {
-    this.setState({currentTime: this.audioRef.currentTime})
-  }
-
-  handleLoadedMetadata = () => {
-    this.setState({duration: this.audioRef.duration})
-  }
-
-  handleSeek = event => {
-    const seekTime = parseFloat(event.target.value)
-    this.audioRef.currentTime = seekTime
-    this.setState({currentTime: seekTime})
-  }
-
-  handleVolumeChange = event => {
-    const newVolume = parseFloat(event.target.value)
-    this.audioRef.volume = newVolume
-    this.setState({volume: newVolume})
-  }
-
-  setAudioRef = ref => {
-    this.audioRef = ref
   }
 
   render() {
@@ -139,6 +112,13 @@ class AlbumDetails extends Component {
               className="album-details-image"
             />
           </div>
+          <div>
+            <p>Track</p>
+            <p>Artist</p>
+            <p>Time</p>
+            <button type="button">Back</button>
+            <p>{album.name}</p>
+          </div>
           <ul className="album-tracklist">
             {album.tracks.items.map(track => {
               const {
@@ -168,49 +148,21 @@ class AlbumDetails extends Component {
               )
             })}
           </ul>
+
           {currentTrack?.previewUrl && (
-            <div className="album-audio-player">
-              <audio
-                ref={this.setAudioRef}
-                src={currentTrack.previewUrl}
-                onTimeUpdate={this.handleTimeUpdate}
-                onLoadedMetadata={this.handleLoadedMetadata}
-                preload="metadata"
-              >
-                <track kind="captions" label="No captions available" src="" />
-              </audio>
-              <div className="custom-audio-controls">
-                <button
-                  type="button"
-                  onClick={this.handlePlayPause}
-                  className="audio-btn"
-                >
-                  {isPlaying ? <FaPause /> : <FaPlay />}
-                </button>
-                <input
-                  type="range"
-                  min="0"
-                  max={duration}
-                  value={currentTime}
-                  onChange={this.handleSeek}
-                  className="timeline-slider"
-                />
-                <div className="volume-wrap">
-                  <span className="volume-icon">
-                    {volume > 0 ? <FaVolumeUp /> : <FaVolumeMute />}
-                  </span>
-                  <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value={volume}
-                    onChange={this.handleVolumeChange}
-                    className="volume-slider"
-                  />
-                </div>
-              </div>
-            </div>
+            <AudioPlayer
+              currentTrack={currentTrack}
+              isPlaying={isPlaying}
+              volume={volume}
+              duration={duration}
+              currentTime={currentTime}
+              albumImage={album.images[0]?.url}
+              onTogglePlay={this.handlePlayPause}
+              onPlayStateChange={val => this.setState({isPlaying: val})}
+              onVolumeChange={vol => this.setState({volume: vol})}
+              onTimeUpdate={time => this.setState({currentTime: time})}
+              onDuration={dur => this.setState({duration: dur})}
+            />
           )}
         </div>
       </div>

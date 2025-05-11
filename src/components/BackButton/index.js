@@ -17,7 +17,7 @@ const BackButton = props => {
           src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745318895/arrow_back_lnm6iz.png"
           alt="back icon"
         />
-        <span className="back-text">Back</span>
+        Back
       </button>
     </div>
   )
