@@ -123,6 +123,11 @@ class AudioPlayer extends Component {
               onChange={this.handleSeek}
               className="timeline-slider"
               aria-label="Seek audio"
+              style={{
+                background: `linear-gradient(to right, #1db954 ${
+                  (currentTime / duration) * 100
+                }%, #fff ${(currentTime / duration) * 100}%)`,
+              }}
             />
             <span className="time-label">{this.formatTime(duration)}</span>
           </div>
@@ -140,6 +145,11 @@ class AudioPlayer extends Component {
               onChange={this.handleVolumeChange}
               className="volume-slider"
               aria-label="Adjust volume"
+              style={{
+                background: `linear-gradient(to right, #1db954 ${
+                  volume * 100
+                }%, #fff ${volume * 100}%)`,
+              }}
             />
           </div>
         </div>

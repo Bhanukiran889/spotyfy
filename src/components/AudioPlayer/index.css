@@ -3,7 +3,7 @@
   bottom: 0;
   left: 72px;
   right: 0;
-  width: 100vw;
+  width: calc(100% - 72px);
   background-color: #1e1e1e;
   padding: 12px 20px;
   display: flex;
@@ -74,6 +74,8 @@
 .timeline-slider {
   flex-grow: 1;
   cursor: pointer;
+  height: 6px;
+  border-radius: 3px;
 }
 
 .volume-wrap {
@@ -85,97 +87,71 @@
 .volume-slider {
   width: 80px;
   cursor: pointer;
+  height: 6px;
+  border-radius: 3px;
 }
 
 .time-label {
   font-size: 12px;
   color: #aaa;
 }
-/* Shared styles for both range sliders */
+
+/* Reset default range styles */
 input[type='range'] {
   -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   width: 100%;
-  height: 4px;
   background: transparent;
-  cursor: pointer;
 }
 
-/* Timeline (song progress) slider */
-.timeline-slider::-webkit-slider-runnable-track {
-  height: 4px;
-  background: linear-gradient(
-    to right,
-    #1db954 var(--progress, 0%),
-    #fff var(--progress, 0%)
-  );
-  border-radius: 4px;
+/* Track */
+input[type='range']::-webkit-slider-runnable-track {
+  height: 6px;
+  background: transparent;
+  border-radius: 3px;
 }
 
-.timeline-slider::-webkit-slider-thumb {
+input[type='range']::-moz-range-track {
+  height: 6px;
+  background: transparent;
+  border-radius: 3px;
+}
+
+input[type='range']::-ms-track {
+  height: 6px;
+  background: transparent;
+  border-radius: 3px;
+  border: none;
+  color: transparent;
+}
+
+/* Thumb */
+input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 14px;
   height: 14px;
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 50%;
   margin-top: -4px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 
-.timeline-slider::-moz-range-track {
-  height: 4px;
-  background: linear-gradient(
-    to right,
-    #1db954 var(--progress, 0%),
-    #fff var(--progress, 0%)
-  );
-  border-radius: 4px;
-}
-
-.timeline-slider::-moz-range-thumb {
+input[type='range']::-moz-range-thumb {
   width: 14px;
   height: 14px;
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 50%;
   border: none;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Volume slider */
-.volume-slider::-webkit-slider-runnable-track {
-  height: 6px;
-  background: linear-gradient(
-    to right,
-    #1db954 var(--volume-progress, 0%),
-    #fff var(--volume-progress, 0%)
-  );
-  border-radius: 4px;
-}
-
-.volume-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  background-color: white;
+input[type='range']::-ms-thumb {
+  width: 14px;
+  height: 14px;
+  background-color: #ffffff;
   border-radius: 50%;
-  margin-top: -2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 
-.volume-slider::-moz-range-track {
-  height: 4px;
-  background: linear-gradient(
-    to right,
-    #1db954 var(--volume-progress, 0%),
-    #fff var(--volume-progress, 0%)
-  );
-  border-radius: 4px;
-}
-
-.volume-slider::-moz-range-thumb {
-  width: 10px;
-  height: 10px;
-  background-color: white;
-  border-radius: 50%;
-  border: none;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-}
+/* Use inline background style for green progress (in JSX) */
