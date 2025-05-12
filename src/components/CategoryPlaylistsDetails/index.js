@@ -69,7 +69,12 @@ class CategoryPlaylistsDetails extends Component {
                       alt={playlist.name}
                       width="150"
                     />
-                    <p>{playlist.name}</p>
+                    <p className="name">
+                      <stong>{playlist.name}</stong>
+                    </p>
+                    <p className="total-tracks">
+                      {playlist.tracks.total} Tracks
+                    </p>
                   </Link>
                 </li>
               ))}

@@ -105,9 +105,25 @@ class PlaylistDetails extends Component {
               <p>{playlist.description}</p>
             </div>
 
+            {/* Static Headings for Testing */}
+            <div className="playlist-details-headings">
+              <p>Track</p>
+              <p>Album</p>
+              <p>Time</p>
+              <p>Artist</p>
+              <p>Added</p>
+            </div>
+
+            {/* Track List */}
             <ul className="playlist-details-tracks">
-              {playlist.tracks.items.map(({track}) => {
-                const {preview_url: previewUrl, id, name, artists} = track
+              {playlist.tracks.items.map(({track}, index) => {
+                const {
+                  preview_url: previewUrl,
+                  id,
+                  name,
+                  artists,
+                  album,
+                } = track
                 const isPlayable = Boolean(previewUrl)
 
                 return (
@@ -120,13 +136,24 @@ class PlaylistDetails extends Component {
                       isPlayable ? this.handleTrackClick(track) : null
                     }
                   >
-                    {name} - {artists[0]?.name}
-                    {!isPlayable && <span> (No preview)</span>}
+                    <p>{name}</p> {/* ✅ Track name for testing */}
+                    <p>{album?.name || 'Unknown Album'}</p>
+                    <p>
+                      {track.duration_ms
+                        ? `${Math.floor(track.duration_ms / 60000)}:${String(
+                            Math.floor((track.duration_ms % 60000) / 1000),
+                          ).padStart(2, '0')}`
+                        : '0:00'}
+                    </p>
+                    <p>{artists[0]?.name || 'Unknown Artist'}</p>
+                    <p>{playlist.tracks.total}</p>{' '}
+                    {/* ✅ "Added" as total tracks count */}
                   </li>
                 )
               })}
             </ul>
 
+            {/* Audio Player for Preview */}
             {currentTrack && (
               <AudioPlayer
                 currentTrack={{

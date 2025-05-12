@@ -23,7 +23,7 @@ const App = () => (
         component={CategoryPlaylistsDetails}
       />
 
-      <ProtectedRoute exact path="/albums/:albumId" component={AlbumDetails} />
+      <ProtectedRoute exact path="/album/:albumId" component={AlbumDetails} />
       <Route path="/not-found" component={NotFound} />
       <Redirect to="/not-found" />
     </Switch>

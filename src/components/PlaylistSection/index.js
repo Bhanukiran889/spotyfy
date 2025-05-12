@@ -67,7 +67,7 @@ class PlaylistSection extends Component {
     const routeMap = {
       'featured-playlists': 'playlist',
       categories: 'category',
-      'new-releases': 'albums',
+      'new-releases': 'album',
     }
 
     const routePrefix = routeMap[type] || ''

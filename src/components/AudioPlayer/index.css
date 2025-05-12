@@ -95,14 +95,14 @@
 input[type='range'] {
   -webkit-appearance: none;
   width: 100%;
-  height: 6px;
+  height: 4px;
   background: transparent;
   cursor: pointer;
 }
 
 /* Timeline (song progress) slider */
 .timeline-slider::-webkit-slider-runnable-track {
-  height: 6px;
+  height: 4px;
   background: linear-gradient(
     to right,
     #1db954 var(--progress, 0%),

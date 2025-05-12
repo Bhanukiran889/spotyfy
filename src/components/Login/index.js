@@ -1,6 +1,6 @@
 import {Component} from 'react'
+import {withRouter, Redirect} from 'react-router-dom'
 import Cookies from 'js-cookie'
-import {Redirect} from 'react-router-dom'
 
 import './index.css'
 
@@ -22,16 +22,12 @@ class LoginForm extends Component {
   }
 
   onSubmitSuccess = jwtToken => {
-    this.setState({isLoading: true})
-
-    setTimeout(() => {
-      Cookies.set('jwt_token', jwtToken, {
-        expires: 30,
-        path: '/',
-      })
-      const {history} = this.props
-      history.replace('/')
-    }, 1500)
+    Cookies.set('jwt_token', jwtToken, {
+      expires: 30,
+      path: '/',
+    })
+    const {history} = this.props
+    history.replace('/')
   }
 
   onSubmitFailure = errorMsg => {
@@ -97,48 +93,30 @@ class LoginForm extends Component {
   }
 
   render() {
-    const {showSubmitError, errorMsg, isLoading} = this.state
+    const {showSubmitError, errorMsg} = this.state
     const jwtToken = Cookies.get('jwt_token')
     if (jwtToken !== undefined) {
       return <Redirect to="/" />
     }
 
     return (
-      <>
-        {isLoading ? (
-          <div className="loader-container">
-            <img
-              src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745139104/Vector_zkrlha.png"
-              className="login-website"
-              alt="loading"
-            />
-            <h1 className="logging">Logging in...</h1>
-          </div>
-        ) : (
-          <div className="login-form-container">
-            <form className="form-continer" onSubmit={this.submitForm}>
-              <img
-                src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745139104/Vector_zkrlha.png"
-                className="login-website"
-                alt="login website logo"
-              />
-              <h1 className="website-name">Spotify Remix</h1>
-              <div className="input-container">
-                {this.renderUsernameField()}
-              </div>
-              <div className="input-container">
-                {this.renderPasswordField()}
-              </div>
-              <button type="submit" className="login-button">
-                Login
-              </button>
-              {showSubmitError && <p className="error-message">*{errorMsg}</p>}
-            </form>
-          </div>
-        )}
-      </>
+      <div className="login-form-container">
+        <form className="form-continer" onSubmit={this.submitForm}>
+          <img
+            src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745139104/Vector_zkrlha.png"
+            className="login-website"
+            alt="login website logo"
+          />
+          <h1 className="website-name">Spotify Remix</h1>
+          <div className="input-container">{this.renderUsernameField()}</div>
+          <div className="input-container">{this.renderPasswordField()}</div>
+          <button type="submit" className="login-button">
+            Login
+          </button>
+          {showSubmitError && <p className="error-message">*{errorMsg}</p>}
+        </form>
+      </div>
     )
   }
 }
-
-export default LoginForm
+export default withRouter(LoginForm)

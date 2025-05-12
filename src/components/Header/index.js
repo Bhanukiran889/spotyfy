@@ -1,11 +1,21 @@
 import {Link, withRouter} from 'react-router-dom'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Cookies from 'js-cookie'
 
 import './index.css'
 
 const Header = props => {
   const [isMenu, setMenu] = useState(false)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const onMenu = () => {
     setMenu(prevState => !prevState)
@@ -28,35 +38,34 @@ const Header = props => {
           />
         </Link>
 
-        {/* Large screen logout button */}
-        <button
-          type="button"
-          className="logout-btn-xl logout-btn"
-          onClick={onClickLogout}
-        >
-          <img
-            src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745162125/log-out-04_ykzr6q.png"
-            alt="logout icon"
-            className="logout-icon"
-          />
-          Logout
-        </button>
+        {isMobile ? (
+          <button
+            type="button"
+            className={`logout-btn-sm logout-btn ${isMenu ? '' : 'is-menu'}`}
+            onClick={onClickLogout}
+          >
+            <img
+              src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745162125/log-out-04_ykzr6q.png"
+              alt="logout icon"
+              className="logout-icon"
+            />
+            Logout
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="logout-btn-xl logout-btn"
+            onClick={onClickLogout}
+          >
+            <img
+              src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745162125/log-out-04_ykzr6q.png"
+              alt="logout icon"
+              className="logout-icon"
+            />
+            Logout
+          </button>
+        )}
 
-        {/* Small screen logout button */}
-        <button
-          type="button"
-          className={`logout-btn-sm logout-btn ${isMenu ? '' : 'is-menu'}`}
-          onClick={onClickLogout}
-        >
-          <img
-            src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745162125/log-out-04_ykzr6q.png"
-            alt="logout icon"
-            className="logout-icon"
-          />
-          Logout
-        </button>
-
-        {/* Menu button with class toggle */}
         <button
           type="button"
           onClick={onMenu}

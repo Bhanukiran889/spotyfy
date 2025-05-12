@@ -113,10 +113,17 @@ class AlbumDetails extends Component {
             />
           </div>
           <div>
-            <p>Track</p>
-            <p>Artist</p>
-            <p>Time</p>
-            <button type="button">Back</button>
+            <ul className="album-details-headers">
+              <li>
+                <p>Track</p>
+              </li>
+              <li>
+                <p>Artist</p>
+              </li>
+              <li>
+                <p>Time</p>
+              </li>
+            </ul>
             <p>{album.name}</p>
           </div>
           <ul className="album-tracklist">
@@ -148,7 +155,6 @@ class AlbumDetails extends Component {
               )
             })}
           </ul>
-
           {currentTrack?.previewUrl && (
             <AudioPlayer
               currentTrack={currentTrack}

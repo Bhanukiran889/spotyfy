@@ -27,7 +27,9 @@
   overflow: hidden;
   width: 160px;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .category-item:hover {
@@ -49,14 +51,19 @@
   border-radius: 8px;
 }
 
-.category-item p {
+.name {
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  color: #f0f0f0;
+  color: #ffffff;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.total-tracks {
+  font-size: 14px;
+  margin-top: 3px;
+  color: #64748b;
 }
 
 /* Responsive Breakpoints */
