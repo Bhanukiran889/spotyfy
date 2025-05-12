@@ -2,7 +2,7 @@ import {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import Header from '../Header'
 import BackButton from '../BackButton'
-import AudioPlayer from '../AudioPlayer' // ✅ Import AudioPlayer
+import AudioPlayer from '../AudioPlayer'
 import './index.css'
 
 class PlaylistDetails extends Component {
@@ -10,7 +10,7 @@ class PlaylistDetails extends Component {
     playlist: null,
     isLoading: true,
     hasError: false,
-    currentTrack: null, // ✅ Current selected track object
+    currentTrack: null,
     isPlaying: false,
     volume: 1,
     currentTime: 0,
@@ -116,7 +116,7 @@ class PlaylistDetails extends Component {
 
             {/* Track List */}
             <ul className="playlist-details-tracks">
-              {playlist.tracks.items.map(({track}, index) => {
+              {playlist.tracks.items.map(({track}) => {
                 const {
                   preview_url: previewUrl,
                   id,
@@ -136,7 +136,7 @@ class PlaylistDetails extends Component {
                       isPlayable ? this.handleTrackClick(track) : null
                     }
                   >
-                    <p>{name}</p> {/* ✅ Track name for testing */}
+                    <p>{name}</p>
                     <p>{album?.name || 'Unknown Album'}</p>
                     <p>
                       {track.duration_ms
@@ -147,13 +147,11 @@ class PlaylistDetails extends Component {
                     </p>
                     <p>{artists[0]?.name || 'Unknown Artist'}</p>
                     <p>{playlist.tracks.total}</p>{' '}
-                    {/* ✅ "Added" as total tracks count */}
                   </li>
                 )
               })}
             </ul>
 
-            {/* Audio Player for Preview */}
             {currentTrack && (
               <AudioPlayer
                 currentTrack={{
