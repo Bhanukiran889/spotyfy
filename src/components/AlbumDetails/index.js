@@ -103,73 +103,88 @@ class AlbumDetails extends Component {
       <div className="container">
         <Header />
         <div className="album-container">
-          <BackButton />
-          <div className="album-details-header">
-            <h2 className="album-details-title">{album.name}</h2>
-            <img
-              src={album.images[0]?.url}
-              alt={album.name}
-              className="album-details-image"
-            />
-          </div>
           <div>
-            <ul className="album-details-headers">
-              <li>
-                <p>Track</p>
-              </li>
-              <li>
-                <p>Artist</p>
-              </li>
-              <li>
-                <p>Time</p>
-              </li>
-            </ul>
-            <p>{album.name}</p>
-          </div>
-          <ul className="album-tracklist">
-            {album.tracks.items.map(track => {
-              const {
-                id,
-                name,
-                artists,
-                duration_ms: durationMs,
-                preview_url: previewUrl,
-              } = track
-              return (
-                <li
-                  key={id}
-                  onClick={() =>
-                    this.handleTrackClick({
-                      id,
-                      name,
-                      artists,
-                      durationMs,
-                      previewUrl,
-                    })
-                  }
-                  className="album-tracklist-item"
-                >
-                  <strong>{name}</strong> - {artists[0]?.name} -{' '}
-                  {(durationMs / 60000).toFixed(2)} mins
+            <BackButton />
+            <div className="album-details-header">
+              <h2 className="album-details-title">{album.name}</h2>
+              <img
+                src={album.images[0]?.url}
+                alt={album.name}
+                className="album-details-image"
+              />
+            </div>
+            <div>
+              <ul className="album-details-headers">
+                <li>
+                  <p>Track</p>
                 </li>
-              )
-            })}
-          </ul>
-          {currentTrack?.previewUrl && (
-            <AudioPlayer
-              currentTrack={currentTrack}
-              isPlaying={isPlaying}
-              volume={volume}
-              duration={duration}
-              currentTime={currentTime}
-              albumImage={album.images[0]?.url}
-              onTogglePlay={this.handlePlayPause}
-              onPlayStateChange={val => this.setState({isPlaying: val})}
-              onVolumeChange={vol => this.setState({volume: vol})}
-              onTimeUpdate={time => this.setState({currentTime: time})}
-              onDuration={dur => this.setState({duration: dur})}
-            />
-          )}
+                <li>
+                  <p>Artist</p>
+                </li>
+                <li>
+                  <p>Time</p>
+                </li>
+              </ul>
+              <p>{album.name}</p>
+            </div>
+            <ul className="album-tracklist">
+              {album.tracks.items.map(track => {
+                const {
+                  id,
+                  name,
+                  artists,
+                  duration_ms: durationMs,
+                  preview_url: previewUrl,
+                } = track
+
+                const formattedDuration = `${Math.floor(
+                  durationMs / 60000,
+                )}:${String(Math.floor((durationMs % 60000) / 1000)).padStart(
+                  2,
+                  '0',
+                )}`
+
+                return (
+                  <li
+                    key={id}
+                    onClick={() =>
+                      this.handleTrackClick({
+                        id,
+                        name,
+                        artists,
+                        durationMs,
+                        previewUrl,
+                      })
+                    }
+                    className="album-tracklist-item"
+                  >
+                    <div className="track-texts">
+                      <p className="track-name">{name}</p>
+                      <p className="track-artist">{artists[0]?.name}</p>
+                    </div>
+                    <div className="duration">{formattedDuration}</div>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          <div className="audio-player-container">
+            {currentTrack?.previewUrl && (
+              <AudioPlayer
+                currentTrack={currentTrack}
+                isPlaying={isPlaying}
+                volume={volume}
+                duration={duration}
+                currentTime={currentTime}
+                albumImage={album.images[0]?.url}
+                onTogglePlay={this.handlePlayPause}
+                onPlayStateChange={val => this.setState({isPlaying: val})}
+                onVolumeChange={vol => this.setState({volume: vol})}
+                onTimeUpdate={time => this.setState({currentTime: time})}
+                onDuration={dur => this.setState({duration: dur})}
+              />
+            )}
+          </div>
         </div>
       </div>
     )

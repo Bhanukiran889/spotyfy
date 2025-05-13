@@ -1,3 +1,4 @@
+// Unchanged imports
 import {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import Header from '../Header'
@@ -92,29 +93,33 @@ class PlaylistDetails extends Component {
       <div className="container">
         <Header />
         <div className="main-container">
-          <BackButton />
           <div>
+            <BackButton />
+          </div>
+          <div className="content-container">
             <img
-              src={playlist.images[0]?.url}
+              src={
+                playlist.images?.[0]?.url || 'https://via.placeholder.com/200'
+              }
               alt={playlist.name}
               className="playlist-details-image"
             />
-            <div>
-              <p>Editors picks</p>
+            <div className="playlist-meta">
+              <p>Editors Picks</p>
               <h2 className="playlist-details-title">{playlist.name}</h2>
-              <p>{playlist.description}</p>
+              <p className="playlist-details-description">
+                {playlist.description}
+              </p>
             </div>
-
-            {/* Static Headings for Testing */}
+          </div>
+          <div className="track-list">
             <div className="playlist-details-headings">
               <p>Track</p>
               <p>Album</p>
               <p>Time</p>
               <p>Artist</p>
-              <p>Added</p>
             </div>
 
-            {/* Track List */}
             <ul className="playlist-details-tracks">
               {playlist.tracks.items.map(({track}) => {
                 const {
@@ -136,23 +141,32 @@ class PlaylistDetails extends Component {
                       isPlayable ? this.handleTrackClick(track) : null
                     }
                   >
-                    <p>{name}</p>
-                    <p>{album?.name || 'Unknown Album'}</p>
-                    <p>
+                    <div>
+                      <p className="track-name">{name}</p>
+                      <p className="track-artist artist-lg">
+                        {artists[0]?.name || 'Unknown Artist'}
+                      </p>
+                    </div>
+                    <p className="track-album">
+                      {album?.name || 'Unknown Album'}
+                    </p>
+                    <p className="track-duration">
                       {track.duration_ms
                         ? `${Math.floor(track.duration_ms / 60000)}:${String(
                             Math.floor((track.duration_ms % 60000) / 1000),
                           ).padStart(2, '0')}`
                         : '0:00'}
                     </p>
-                    <p>{artists[0]?.name || 'Unknown Artist'}</p>
-                    <p>{playlist.tracks.total}</p>{' '}
+                    <p className="track-artist artist-sm">
+                      {artists[0]?.name || 'Unknown Artist'}
+                    </p>
                   </li>
                 )
               })}
             </ul>
-
-            {currentTrack && (
+          </div>
+          {currentTrack && (
+            <div className="player-wrapper">
               <AudioPlayer
                 currentTrack={{
                   id: currentTrack.id,
@@ -171,8 +185,8 @@ class PlaylistDetails extends Component {
                 onVolumeChange={this.handleVolumeChange}
                 onPlayStateChange={this.handlePlayStateChange}
               />
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     )

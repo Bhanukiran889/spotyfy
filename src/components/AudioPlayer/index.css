@@ -1,9 +1,8 @@
 .album-audio-player {
   position: fixed;
   bottom: 0;
-  left: 72px;
   right: 0;
-  width: calc(100% - 72px);
+  width: 100%;
   background-color: #1e1e1e;
   padding: 12px 20px;
   display: flex;
@@ -154,4 +153,150 @@ input[type='range']::-ms-thumb {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Use inline background style for green progress (in JSX) */
+@media screen and (max-width: 768px) {
+  .album-audio-player {
+    margin: 0;
+    width: 100vw;
+  }
+}
+.album-audio-player {
+  animation: fadeInUp 0.3s ease-in-out;
+  padding: 16px 24px;
+}
+
+.custom-audio-controls {
+  gap: 20px;
+  flex-wrap: wrap;
+  row-gap: 12px;
+}
+
+.track-info-section {
+  min-width: 160px;
+}
+
+.track-thumbnail {
+  border-radius: 6px;
+  transition: transform 0.3s;
+}
+.track-thumbnail:hover {
+  transform: scale(1.05);
+}
+
+.track-meta {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.track-name,
+.track-artist {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.audio-btn {
+  transition: transform 0.2s ease;
+}
+.audio-btn:hover {
+  transform: scale(1.15);
+}
+
+.timeline-slider,
+.volume-slider {
+  transition: background 0.3s ease;
+}
+
+.volume-slider {
+  max-width: 90px;
+}
+
+@media screen and (max-width: 768px) {
+  .album-audio-player {
+    padding: 14px 16px;
+  }
+
+  .track-meta {
+    max-width: 120px;
+  }
+
+  .timeline-wrap {
+    max-width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .volume-wrap {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .custom-audio-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .track-info-section {
+    justify-content: flex-start;
+  }
+
+  .timeline-wrap,
+  .volume-wrap {
+    width: 100%;
+  }
+
+  .timeline-wrap {
+    justify-content: center;
+  }
+
+  .volume-wrap {
+    justify-content: space-between;
+  }
+
+  .volume-slider {
+    width: 100px;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .custom-audio-controls {
+    gap: 32px;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+
+  .track-info-section {
+    max-width: 240px;
+    flex: 0 0 auto;
+    margin: auto;
+  }
+
+  .timeline-wrap {
+    flex-grow: 1;
+    max-width: 500px;
+    justify-content: center;
+  }
+
+  .volume-wrap {
+    min-width: 140px;
+    justify-content: flex-end;
+  }
+
+  .audio-btn {
+    margin: 0 12px;
+  }
+}
