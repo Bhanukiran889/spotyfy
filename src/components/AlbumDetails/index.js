@@ -113,20 +113,6 @@ class AlbumDetails extends Component {
                 className="album-details-image"
               />
             </div>
-            <div>
-              <ul className="album-details-headers">
-                <li>
-                  <p>Track</p>
-                </li>
-                <li>
-                  <p>Artist</p>
-                </li>
-                <li>
-                  <p>Time</p>
-                </li>
-              </ul>
-              <p>{album.name}</p>
-            </div>
             <ul className="album-tracklist">
               {album.tracks.items.map(track => {
                 const {

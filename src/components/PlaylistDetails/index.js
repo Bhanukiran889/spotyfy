@@ -95,78 +95,78 @@ class PlaylistDetails extends Component {
         <div className="main-container">
           <div>
             <BackButton />
-          </div>
-          <div className="content-container">
-            <img
-              src={
-                playlist.images?.[0]?.url || 'https://via.placeholder.com/200'
-              }
-              alt={playlist.name}
-              className="playlist-details-image"
-            />
-            <div className="playlist-meta">
-              <p>Editors Picks</p>
-              <h2 className="playlist-details-title">{playlist.name}</h2>
-              <p className="playlist-details-description">
-                {playlist.description}
-              </p>
+            <div className="content-container">
+              <img
+                src={
+                  playlist.images?.[0]?.url || 'https://via.placeholder.com/200'
+                }
+                alt={playlist.name}
+                className="playlist-details-image"
+              />
+              <div className="playlist-meta">
+                <p>Editors Picks</p>
+                <h2 className="playlist-details-title">{playlist.name}</h2>
+                <p className="playlist-details-description">
+                  {playlist.description}
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="track-list">
-            <div className="playlist-details-headings">
-              <p>Track</p>
-              <p>Album</p>
-              <p>Time</p>
-              <p>Artist</p>
-            </div>
+            <div className="track-list">
+              <div className="playlist-details-headings">
+                <p>Track</p>
+                <p>Album</p>
+                <p>Time</p>
+                <p>Artist</p>
+              </div>
 
-            <ul className="playlist-details-tracks">
-              {playlist.tracks.items.map(({track}) => {
-                const {
-                  preview_url: previewUrl,
-                  id,
-                  name,
-                  artists,
-                  album,
-                } = track
-                const isPlayable = Boolean(previewUrl)
+              <ul className="playlist-details-tracks">
+                {playlist.tracks.items.map(({track}) => {
+                  const {
+                    preview_url: previewUrl,
+                    id,
+                    name,
+                    artists,
+                    album,
+                  } = track
+                  const isPlayable = Boolean(previewUrl)
 
-                return (
-                  <li
-                    key={id}
-                    className={`playlist-details-track-item ${
-                      isPlayable ? 'clickable' : 'disabled'
-                    }`}
-                    onClick={() =>
-                      isPlayable ? this.handleTrackClick(track) : null
-                    }
-                  >
-                    <div>
-                      <p className="track-name">{name}</p>
-                      <p className="track-artist artist-lg">
+                  return (
+                    <li
+                      key={id}
+                      className={`playlist-details-track-item ${
+                        isPlayable ? 'clickable' : 'disabled'
+                      }`}
+                      onClick={() =>
+                        isPlayable ? this.handleTrackClick(track) : null
+                      }
+                    >
+                      <div className="track-title">
+                        <p className="track-name">{name}</p>
+                        <p className="track-artist artist-lg">
+                          {artists[0]?.name || 'Unknown Artist'}
+                        </p>
+                      </div>
+                      <p className="track-album">
+                        {album?.name || 'Unknown Album'}
+                      </p>
+                      <p className="track-duration">
+                        {track.duration_ms
+                          ? `${Math.floor(track.duration_ms / 60000)}:${String(
+                              Math.floor((track.duration_ms % 60000) / 1000),
+                            ).padStart(2, '0')}`
+                          : '0:00'}
+                      </p>
+                      <p className="track-artist artist-sm">
                         {artists[0]?.name || 'Unknown Artist'}
                       </p>
-                    </div>
-                    <p className="track-album">
-                      {album?.name || 'Unknown Album'}
-                    </p>
-                    <p className="track-duration">
-                      {track.duration_ms
-                        ? `${Math.floor(track.duration_ms / 60000)}:${String(
-                            Math.floor((track.duration_ms % 60000) / 1000),
-                          ).padStart(2, '0')}`
-                        : '0:00'}
-                    </p>
-                    <p className="track-artist artist-sm">
-                      {artists[0]?.name || 'Unknown Artist'}
-                    </p>
-                  </li>
-                )
-              })}
-            </ul>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
           </div>
-          {currentTrack && (
-            <div className="player-wrapper">
+          <div className="audio-player-container">
+            {currentTrack && (
               <AudioPlayer
                 currentTrack={{
                   id: currentTrack.id,
@@ -185,8 +185,8 @@ class PlaylistDetails extends Component {
                 onVolumeChange={this.handleVolumeChange}
                 onPlayStateChange={this.handlePlayStateChange}
               />
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     )

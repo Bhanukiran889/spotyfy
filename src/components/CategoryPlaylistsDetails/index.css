@@ -27,7 +27,9 @@
   overflow: hidden;
   width: 160px;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .category-item:hover {
@@ -71,7 +73,7 @@
   }
 
   .category-item img {
-    height: 140px;
+    height: 100%;
   }
 
   .category-container {
@@ -81,11 +83,12 @@
 
 @media screen and (max-width: 480px) {
   .category-item {
-    width: 100%;
+    width: 300px;
+    height: 350px;
   }
 
   .category-item img {
-    height: 120px;
+    height: 100%;
   }
 
   .category-item p {
