@@ -5,20 +5,11 @@
   flex-direction: column;
   align-items: flex-start;
   padding-top: 50px;
-  padding-bottom: 80px; /* enough space for fixed player */
+  padding: 60px 30px 80px;
   background-color: #181818;
   color: #fff;
   width: 92vw;
   font-family: Assistant;
-}
-
-.playlist-details-loader,
-.playlist-details-error {
-  text-align: center;
-  font-size: 18px;
-  margin-top: 50px;
-  color: #ff4c4c;
-  font-weight: 500;
 }
 
 .content-container {
@@ -26,10 +17,18 @@
   flex-wrap: wrap;
   align-items: flex-start;
   margin-top: 20px;
-  padding: 0 30px;
   gap: 20px;
 }
-
+.loading-container {
+  display: flex;
+  border-radius: 15px;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  height: 80vh;
+  width: 100%;
+}
 .playlist-details-image {
   width: 100%;
   max-width: 200px;
@@ -39,6 +38,8 @@
 
 .playlist-meta {
   flex: 1;
+  margin: 20px;
+  align-self: flex-end;
   min-width: 200px;
 }
 
@@ -53,7 +54,7 @@
   color: #cccccc;
   font-size: 14px;
 }
-.track-list{
+.track-list {
   width: 100%;
 }
 .track-title {
@@ -64,14 +65,17 @@
   display: grid;
   grid-template-columns: 2fr 2fr 1fr 2fr;
   gap: 10px;
-  margin-top: 40px;
+  margin-top: 10px;
   font-weight: bold;
   padding: 10px 0;
   border-bottom: 1px solid #333;
   font-size: 14px;
   overflow-x: auto;
 }
-
+.headings {
+  display: flex;
+  align-items: center;
+}
 .playlist-details-tracks {
   list-style: none;
   padding: 0;
@@ -86,9 +90,6 @@
   display: none;
 }
 
-.track-list {
-  padding: 30px;
-}
 .playlist-details-track-item {
   display: grid;
   grid-template-columns: 2fr 2fr 1fr 2fr;
@@ -162,6 +163,13 @@
     gap: 10px;
     font-size: 14px;
   }
+  .playlist-meta{
+    text-align: center;
+  }
+  .headings {
+    flex-direction: column;
+    align-items: center;
+  }
 
   .track-name {
     font-weight: 600;
@@ -181,7 +189,7 @@
   .track-album {
     display: none;
   }
-  .track-list{
+  .track-list {
     flex: 1;
   }
   .track-duration {

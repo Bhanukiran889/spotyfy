@@ -1,6 +1,8 @@
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
 import './index.css'
+import Loader from '../Loader'
+import Reload from '../Reload'
 
 class PlaylistSection extends Component {
   state = {
@@ -73,25 +75,7 @@ class PlaylistSection extends Component {
     const routePrefix = routeMap[type] || ''
 
     if (hasError) {
-      return (
-        <div className="playlist-error-container">
-          <img
-            className="playlist-error-img"
-            src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745397060/Icon_1_vcnjka.png"
-            alt="failure view"
-          />
-          <p className="playlist-error-text">
-            Something went wrong. Please try again
-          </p>
-          <button
-            className="playlist-try-again-btn"
-            type="button"
-            onClick={this.getPlaylists}
-          >
-            Try Again
-          </button>
-        </div>
-      )
+      return <Reload reload={this.getPlaylists} />
     }
 
     return (
@@ -145,8 +129,8 @@ class PlaylistSection extends Component {
     return (
       <div className="playlist-section-container">
         {isLoading ? (
-          <div data-testid="loader" className="playlist-loader-container">
-            <p className="playlist-loading-text">Loading...</p>
+          <div className="loader-container">
+            <Loader />
           </div>
         ) : (
           this.renderContent()

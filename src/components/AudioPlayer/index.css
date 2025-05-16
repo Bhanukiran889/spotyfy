@@ -1,7 +1,6 @@
 .album-audio-player {
   width: 100%;
   background-color: #1e1e1e;
-  padding: 12px 20px;
   display: flex;
   flex-direction: column;
   z-index: 1000;
@@ -238,15 +237,23 @@ input[type='range']::-ms-thumb {
   }
 }
 
-@media screen and (max-width: px) {
+@media screen and (max-width: 480px) {
+  .custom-audio-player {
+    margin: 0;
+    justify-content: space-between;
+  }
   .custom-audio-controls {
     flex-direction: row;
-    margin: 0 auto;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
   }
 
   .track-info-section {
     justify-content: flex-start;
+  }
+  .tracks-line {
+    display: none;
   }
 
   .timeline-wrap,
@@ -260,10 +267,6 @@ input[type='range']::-ms-thumb {
 
   .volume-wrap {
     justify-content: space-between;
-  }
-
-  .volume-slider {
-    width: 100px;
   }
 }
 

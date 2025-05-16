@@ -5,6 +5,7 @@ import Cookies from 'js-cookie'
 import Header from '../Header'
 import BackButton from '../BackButton'
 import AudioPlayer from '../AudioPlayer'
+import Loader from '../Loader'
 
 import './index.css'
 
@@ -15,7 +16,7 @@ class AlbumDetails extends Component {
     hasError: false,
     currentTrack: null,
     isPlaying: false,
-    volume: 1,
+    volume: 2,
     duration: 0,
     currentTime: 0,
   }
@@ -95,65 +96,89 @@ class AlbumDetails extends Component {
       currentTime,
     } = this.state
 
-    if (isLoading) return <p>Loading...</p>
-    if (hasError) return <p>Something went wrong. Please try again later.</p>
+    if (hasError) {
+      return (
+        <div className="playlist-error-container">
+          <img
+            className="playlist-error-img"
+            src="https://res.cloudinary.com/dulgbxqkm/image/upload/v1745397060/Icon_1_vcnjka.png"
+            alt="failure view"
+          />
+          <p className="playlist-error-text">
+            Something went wrong. Please try again
+          </p>
+          <button
+            className="playlist-try-again-btn"
+            type="button"
+            onClick={this.fetchAlbum}
+          >
+            Try Again
+          </button>
+        </div>
+      )
+    }
     if (!album) return null
 
     return (
       <div className="container">
         <Header />
         <div className="album-container">
-          <div>
-            <BackButton />
-            <div className="album-details-header">
+          {isLoading ? (
+            Loader
+          ) : (
+            <>
+              <BackButton />
+              <div className="album-details-header">
+                <img
+                  src={album.images[0]?.url}
+                  alt={album.name}
+                  className="album-details-image"
+                />
+              </div>
               <h2 className="album-details-title">{album.name}</h2>
-              <img
-                src={album.images[0]?.url}
-                alt={album.name}
-                className="album-details-image"
-              />
-            </div>
-            <ul className="album-tracklist">
-              {album.tracks.items.map(track => {
-                const {
-                  id,
-                  name,
-                  artists,
-                  duration_ms: durationMs,
-                  preview_url: previewUrl,
-                } = track
+              <ul className="album-tracklist">
+                {album.tracks.items.map(track => {
+                  const {
+                    id,
+                    name,
+                    artists,
+                    duration_ms: durationMs,
+                    preview_url: previewUrl,
+                  } = track
 
-                const formattedDuration = `${Math.floor(
-                  durationMs / 60000,
-                )}:${String(Math.floor((durationMs % 60000) / 1000)).padStart(
-                  2,
-                  '0',
-                )}`
+                  const formattedDuration = `${Math.floor(
+                    durationMs / 60000,
+                  )}:${String(Math.floor((durationMs % 60000) / 1000)).padStart(
+                    2,
+                    '0',
+                  )}`
 
-                return (
-                  <li
-                    key={id}
-                    onClick={() =>
-                      this.handleTrackClick({
-                        id,
-                        name,
-                        artists,
-                        durationMs,
-                        previewUrl,
-                      })
-                    }
-                    className="album-tracklist-item"
-                  >
-                    <div className="track-texts">
-                      <p className="track-name">{name}</p>
-                      <p className="track-artist">{artists[0]?.name}</p>
-                    </div>
-                    <div className="duration">{formattedDuration}</div>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
+                  return (
+                    <li
+                      key={id}
+                      onClick={() =>
+                        this.handleTrackClick({
+                          id,
+                          name,
+                          artists,
+                          durationMs,
+                          previewUrl,
+                        })
+                      }
+                      className="album-tracklist-item"
+                    >
+                      <div className="track-texts">
+                        <p className="track-name">{name}</p>
+                        <p className="track-artist">{artists[0]?.name}</p>
+                      </div>
+                      <div className="duration">{formattedDuration}</div>
+                    </li>
+                  )
+                })}
+              </ul>
+            </>
+          )}
+
           <div className="audio-player-container">
             {currentTrack?.previewUrl && (
               <AudioPlayer
