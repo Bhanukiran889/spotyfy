@@ -123,11 +123,11 @@ class AlbumDetails extends Component {
       <div className="container">
         <Header />
         <div className="album-container">
+          <BackButton />
           {isLoading ? (
             Loader
           ) : (
             <>
-              <BackButton />
               <div className="album-details-header">
                 <img
                   src={album.images[0]?.url}

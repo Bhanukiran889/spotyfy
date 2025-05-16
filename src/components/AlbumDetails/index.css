@@ -142,9 +142,9 @@
   .track-texts {
     flex-grow: 1;
   }
-.album-details-title{
-  font-size: 16px;
-}
+  .album-details-title {
+    font-size: 16px;
+  }
   .duration {
     align-self: flex-start;
   }
